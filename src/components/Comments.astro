@@ -1,0 +1,14 @@
+---
+import '@waline/client/style';
+---
+
+<div id="waline"></div>
+
+<script>
+  import { init } from '@waline/client';
+
+  init({
+    el: '#waline',
+    serverURL: 'https://waline-server-ten-liart.vercel.app',
+  });
+</script>

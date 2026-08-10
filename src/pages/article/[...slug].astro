@@ -1,6 +1,7 @@
 ---
 import { getCollection, render } from "astro:content";
 import Layout from "../../layouts/Layout.astro";
+import Comments from "../../components/Comments.astro";
 
 
 export async function getStaticPaths() {
@@ -70,6 +71,8 @@ const category = article.id.split("/")[0];
     <Content />
 
   </div>
+
+  <Comments />
 
 
 
