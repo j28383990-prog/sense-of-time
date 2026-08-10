@@ -1,0 +1,459 @@
+---
+const { articles } = Astro.props;
+
+
+const sortedArticles = [...articles].sort(
+  (a, b) =>
+    new Date(b.data.date).getTime() -
+    new Date(a.data.date).getTime()
+);
+
+
+
+const groupedArticles = sortedArticles.reduce(
+  (acc, article) => {
+
+    const year = article.data.date.substring(0, 4);
+
+
+    if (!acc[year]) {
+
+      acc[year] = [];
+
+    }
+
+
+    acc[year].push(article);
+
+
+    return acc;
+
+  },
+  {}
+);
+
+---
+
+
+<div class="archive">
+
+
+{
+  Object.entries(groupedArticles).map(
+    ([year, items]) => (
+
+      <section class="year">
+
+
+        <h3>
+          {year}
+        </h3>
+
+
+
+        {
+          items.map(
+            (article, index) => (
+
+              <a
+                class="entry"
+                href={`/article/${article.id}`}
+              >
+
+
+                {
+                  article.data.image && (
+
+                    <div class="thumbnail">
+
+                      <img
+                        src={article.data.image}
+                        alt={article.data.title}
+                      />
+
+                    </div>
+
+                  )
+                }
+
+
+
+                <div class="number">
+
+                  {
+                    String(index + 1)
+                    .padStart(2, "0")
+                  }
+
+                </div>
+
+
+
+
+                <div class="content">
+
+
+                  <h2>
+                    {article.data.title}
+                  </h2>
+
+
+
+                  <p>
+                    {article.data.description}
+                  </p>
+
+
+
+                  <span>
+                    {article.data.date}
+                  </span>
+
+
+                </div>
+
+
+              </a>
+
+
+            )
+          )
+        }
+
+
+      </section>
+
+    )
+  )
+}
+
+
+</div>
+
+
+
+
+
+<style>
+
+
+.archive {
+
+
+display:flex;
+
+
+flex-direction:column;
+
+
+gap:90px;
+
+
+}
+
+
+
+
+
+.year h3 {
+
+
+font-family:
+
+Arial,
+Helvetica,
+sans-serif;
+
+
+font-size:12px;
+
+
+font-weight:400;
+
+
+letter-spacing:6px;
+
+
+color:#999;
+
+
+margin-bottom:40px;
+
+
+}
+
+
+
+
+
+
+.entry {
+
+
+display:grid;
+
+
+grid-template-columns:
+
+120px 50px 1fr;
+
+
+gap:30px;
+
+
+align-items:center;
+
+
+padding:30px 0;
+
+
+border-bottom:1px solid #ddd;
+
+
+text-decoration:none;
+
+
+color:#111;
+
+
+transition:
+opacity .3s ease;
+
+
+}
+
+
+
+.entry:hover {
+
+
+opacity:.6;
+
+
+}
+
+
+
+
+
+/* =====================
+   Thumbnail
+===================== */
+
+
+.thumbnail {
+
+
+width:120px;
+
+
+height:90px;
+
+
+overflow:hidden;
+
+
+}
+
+
+
+
+
+.thumbnail img {
+
+
+width:100%;
+
+
+height:100%;
+
+
+object-fit:cover;
+
+
+display:block;
+
+
+}
+
+
+
+
+
+/* =====================
+   Number
+===================== */
+
+
+.number {
+
+
+font-family:
+
+Arial,
+Helvetica,
+sans-serif;
+
+
+font-size:12px;
+
+
+letter-spacing:3px;
+
+
+color:#999;
+
+
+}
+
+
+
+
+
+
+/* =====================
+   Content
+===================== */
+
+
+.content h2 {
+
+
+font-family:
+
+"Times New Roman",
+serif;
+
+
+font-size:38px;
+
+
+font-weight:400;
+
+
+font-style:italic;
+
+
+margin:0 0 15px;
+
+
+}
+
+
+
+
+
+.content p {
+
+
+font-size:16px;
+
+
+line-height:1.7;
+
+
+color:#666;
+
+
+margin:0 0 15px;
+
+
+}
+
+
+
+
+
+.content span {
+
+
+font-family:
+
+Arial,
+Helvetica,
+sans-serif;
+
+
+font-size:11px;
+
+
+letter-spacing:3px;
+
+
+color:#999;
+
+
+}
+
+
+
+
+
+
+
+/* =====================
+   Mobile
+===================== */
+
+
+@media(max-width:800px){
+
+
+.entry {
+
+
+grid-template-columns:
+
+90px 35px 1fr;
+
+
+gap:15px;
+
+
+}
+
+
+
+
+
+.thumbnail {
+
+
+width:90px;
+
+
+height:65px;
+
+
+}
+
+
+
+
+
+.content h2 {
+
+
+font-size:28px;
+
+
+}
+
+
+
+
+
+.content p {
+
+
+display:none;
+
+
+}
+
+
+}
+
+
+
+</style>

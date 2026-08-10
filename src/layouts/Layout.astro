@@ -1,0 +1,342 @@
+---
+const {
+  title = "A Sense of Time"
+} = Astro.props;
+---
+
+
+<html lang="en">
+
+
+<head>
+
+<meta charset="UTF-8" />
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+
+<title>
+{title}
+</title>
+
+
+</head>
+
+
+
+<body>
+
+
+<header>
+
+
+<div class="logo">
+
+<a href="/">
+HOME
+</a>
+
+</div>
+
+
+
+
+<nav>
+
+
+<a href="/motion">
+MOTION
+</a>
+
+
+<a href="/heritage">
+HERITAGE
+</a>
+
+
+<a href="/essence">
+ESSENCE
+</a>
+
+
+<a href="/contact">
+CONTACT
+</a>
+
+
+</nav>
+
+
+</header>
+
+
+
+
+
+<main>
+
+<slot />
+
+</main>
+
+
+
+
+
+<style>
+
+
+html {
+
+scroll-behavior:smooth;
+
+}
+
+
+
+body {
+
+margin:0;
+
+background:#fff;
+
+color:#111;
+
+font-family:
+
+"Helvetica Neue",
+Helvetica,
+Arial,
+sans-serif;
+
+}
+
+
+
+* {
+
+box-sizing:border-box;
+
+}
+
+
+
+a {
+
+color:inherit;
+
+}
+
+
+
+
+
+/* =========================
+   Fixed Navigation
+========================= */
+
+
+header {
+
+
+position:fixed;
+
+
+top:0;
+
+
+left:0;
+
+
+right:0;
+
+
+height:100px;
+
+
+display:flex;
+
+
+justify-content:space-between;
+
+
+align-items:center;
+
+
+padding:0 55px;
+
+
+background:rgba(255,255,255,.92);
+
+
+backdrop-filter:blur(10px);
+
+
+z-index:1000;
+
+
+}
+
+
+
+
+
+.logo {
+
+
+font-family:
+
+"Times New Roman",
+serif;
+
+
+letter-spacing:8px;
+
+
+font-size:20px;
+
+
+}
+
+
+
+.logo a {
+
+
+text-decoration:none;
+
+
+}
+
+
+
+
+
+nav a {
+
+
+margin-left:40px;
+
+
+text-decoration:none;
+
+
+font-size:13px;
+
+
+letter-spacing:2px;
+
+
+transition:opacity .3s ease;
+
+
+}
+
+
+
+
+
+nav a:hover {
+
+
+opacity:.5;
+
+
+}
+
+
+
+
+
+
+/* =========================
+   Page Offset
+========================= */
+
+
+main {
+
+
+padding-top:100px;
+
+
+min-height:80vh;
+
+
+}
+
+
+
+
+
+
+
+/* =========================
+   Mobile
+========================= */
+
+
+@media(max-width:900px){
+
+
+header {
+
+
+height:80px;
+
+
+padding:0 25px;
+
+
+}
+
+
+
+.logo {
+
+
+font-size:16px;
+
+
+letter-spacing:5px;
+
+
+}
+
+
+
+nav a {
+
+
+margin-left:15px;
+
+
+font-size:11px;
+
+
+}
+
+
+
+main {
+
+
+padding-top:80px;
+
+
+}
+
+
+
+}
+
+
+
+</style>
+
+
+
+</body>
+
+
+</html>

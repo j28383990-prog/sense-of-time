@@ -1,0 +1,233 @@
+---
+import { getCollection } from "astro:content";
+import Layout from "../../layouts/Layout.astro";
+import ArticleList from "../../components/ArticleList.astro";
+
+
+const articles = await getCollection("articles");
+
+
+const heritageArticles = articles.filter(
+  (article)=>article.id.startsWith("heritage/")
+);
+
+---
+
+
+<Layout title="Heritage">
+
+
+<main>
+
+
+<header>
+
+
+<h1>
+HERITAGE
+</h1>
+
+
+
+<div class="intro">
+
+
+<h2>
+Objects with memories.
+<br/>
+Craftsmanship.
+<br/>
+History preserved.
+</h2>
+
+
+
+<p>
+Archive of tradition,
+<br/>
+materials and human hands.
+</p>
+
+
+</div>
+
+
+</header>
+
+
+
+<section class="archive">
+
+
+<ArticleList articles={heritageArticles}/>
+
+
+</section>
+
+
+
+</main>
+
+
+</Layout>
+
+
+
+
+
+<style>
+
+
+main {
+
+
+max-width:900px;
+
+
+margin:100px auto;
+
+
+padding:0 40px;
+
+
+}
+
+
+
+header {
+
+
+margin-bottom:100px;
+
+
+}
+
+
+
+h1 {
+
+
+font-family:
+"Times New Roman",
+serif;
+
+
+font-size:70px;
+
+
+font-weight:400;
+
+
+font-style:italic;
+
+
+letter-spacing:2px;
+
+
+margin:0 0 60px;
+
+
+}
+
+
+
+
+.intro h2 {
+
+
+font-family:
+"Times New Roman",
+serif;
+
+
+font-size:42px;
+
+
+font-weight:400;
+
+
+font-style:italic;
+
+
+line-height:1.35;
+
+
+margin:0 0 35px;
+
+
+}
+
+
+
+
+
+.intro p {
+
+
+font-size:18px;
+
+
+line-height:1.8;
+
+
+color:#666;
+
+
+letter-spacing:1px;
+
+
+}
+
+
+
+
+
+.archive {
+
+
+margin-top:40px;
+
+
+}
+
+
+
+
+
+@media(max-width:700px){
+
+
+main {
+
+
+padding:0 25px;
+
+
+}
+
+
+
+h1 {
+
+
+font-size:55px;
+
+
+}
+
+
+
+.intro h2 {
+
+
+font-size:32px;
+
+
+}
+
+
+
+}
+
+
+</style>
