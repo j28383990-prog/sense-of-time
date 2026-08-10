@@ -32,15 +32,21 @@ const groupedArticles = sortedArticles.reduce(
   {}
 );
 
+
+// 年份降序排列
+const sortedYears = Object.keys(groupedArticles)
+  .sort((a, b) => Number(b) - Number(a));
+
 ---
+
 
 
 <div class="archive">
 
 
 {
-  Object.entries(groupedArticles).map(
-    ([year, items]) => (
+  sortedYears.map(
+    (year) => (
 
       <section class="year">
 
@@ -52,7 +58,7 @@ const groupedArticles = sortedArticles.reduce(
 
 
         {
-          items.map(
+          groupedArticles[year].map(
             (article, index) => (
 
               <a
@@ -136,18 +142,13 @@ const groupedArticles = sortedArticles.reduce(
 
 <style>
 
-
 .archive {
-
 
 display:flex;
 
-
 flex-direction:column;
 
-
 gap:90px;
-
 
 }
 
