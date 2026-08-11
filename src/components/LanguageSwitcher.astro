@@ -1,0 +1,237 @@
+---
+interface Props {
+  defaultLanguage?: "zh" | "en" | "jp";
+}
+
+const {
+  defaultLanguage = "zh"
+} = Astro.props;
+---
+
+
+<div 
+class="language-switcher"
+data-default={defaultLanguage}
+>
+
+
+<div class="language-buttons">
+
+
+<button 
+class="lang-btn"
+data-lang="zh">
+🇨🇳 中文
+</button>
+
+
+<button 
+class="lang-btn"
+data-lang="en">
+🇺🇸 English
+</button>
+
+
+<button 
+class="lang-btn"
+data-lang="jp">
+🇯🇵 日本語
+</button>
+
+
+</div>
+
+
+
+<div class="language-content">
+
+
+<div class="lang-panel zh">
+<slot name="zh" />
+</div>
+
+
+<div class="lang-panel en">
+<slot name="en" />
+</div>
+
+
+<div class="lang-panel jp">
+<slot name="jp" />
+</div>
+
+
+</div>
+
+
+</div>
+
+
+
+<script>
+
+const root =
+document.documentElement;
+
+
+function setLanguage(lang){
+
+
+root.dataset.language = lang;
+
+
+localStorage.setItem(
+"sense-language",
+lang
+);
+
+
+document
+.querySelectorAll(
+".lang-btn"
+)
+.forEach(btn=>{
+
+
+btn.classList.toggle(
+"active",
+btn.dataset.lang === lang
+);
+
+
+});
+
+
+}
+
+
+
+const saved =
+localStorage.getItem(
+"sense-language"
+);
+
+
+setLanguage(
+saved || "zh"
+);
+
+
+
+document
+.querySelectorAll(".lang-btn")
+.forEach(btn=>{
+
+
+btn.addEventListener(
+"click",
+()=>{
+
+
+setLanguage(
+btn.dataset.lang
+);
+
+
+});
+
+
+});
+
+
+</script>
+
+
+
+<style>
+
+
+.language-switcher {
+
+margin:40px 0;
+
+}
+
+
+
+.language-buttons {
+
+display:flex;
+
+justify-content:center;
+
+gap:18px;
+
+margin-bottom:40px;
+
+border-bottom:1px solid #ddd;
+
+padding-bottom:15px;
+
+}
+
+
+
+.lang-btn {
+
+background:none;
+
+border:none;
+
+cursor:pointer;
+
+font-size:13px;
+
+letter-spacing:1px;
+
+color:#999;
+
+padding:8px 14px;
+
+}
+
+
+
+.lang-btn.active {
+
+color:#000;
+
+border-bottom:1px solid #000;
+
+}
+
+
+
+.lang-panel {
+
+display:none;
+
+}
+
+
+
+html[data-language="zh"] .lang-panel.zh {
+
+display:block;
+
+}
+
+
+
+html[data-language="en"] .lang-panel.en {
+
+display:block;
+
+}
+
+
+
+html[data-language="jp"] .lang-panel.jp {
+
+display:block;
+
+}
+
+
+
+</style>
